@@ -1,0 +1,164 @@
+﻿@model ThermalFlowAnalyzer.Domain.AnalysisViewModel
+
+<h3 class="mb-3">
+    📊 Анализ: @Model.Input.ProjectTitle
+</h3>
+
+<div class="mb-3">
+    <a class="btn btn-main me-2"
+       href="/Analysis/Recalculate/@Model.Input.Id">
+        🔄 Пересчитать
+    </a>
+
+    <a class="btn btn-warning me-2"
+       href="/Analysis/Edit/@Model.Input.Id">
+        ✏️ Редактировать
+    </a>
+
+    <a class="btn btn-danger"
+       href="/Analysis/Delete/@Model.Input.Id">
+        ❌ Удалить
+    </a>
+</div>
+
+
+<ul class="nav nav-tabs mb-3">
+    <li class="nav-item">
+        <a class="nav-link active" data-bs-toggle="tab" href="#charts">
+            Графики
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#table">
+            Таблица
+        </a>
+    </li>
+</ul>
+
+<div class="tab-content">
+
+    <div class="tab-pane fade show active" id="charts">
+        <div class="card p-3 mb-4 bg-white">
+            <canvas id="tempChart"></canvas>
+        </div>
+        <div class="card p-3 bg-white">
+            <canvas id="deltaChart"></canvas>
+        </div>
+
+    </div>
+
+    <div class="tab-pane fade" id="table">
+        <div class="card p-3">
+            <table class="table table-sm table-light">
+                <thead>
+                    <tr>
+                        <th>Параметр</th>
+                        @foreach (var p in Model.Points)
+                        {
+                            <th>@p.Height</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Относительная высота Y</th>
+                        @foreach (var p in Model.Points)
+                        {
+                            <td>@p.RelativeHeight</td>
+                        }
+                    </tr>
+                    <tr>
+                        <th>1 − exp</th>
+                        @foreach (var p in Model.Points)
+                        {
+                            <td>@p.Exp1</td>
+                        }
+                    </tr>
+                    <tr>
+                        <th>1 − m·exp</th>
+                        @foreach (var p in Model.Points)
+                        {
+                            <td>@p.Exp2</td>
+                        }
+                    </tr>
+                    <tr>
+                        <th>θ материала</th>
+                        @foreach (var p in Model.Points)
+                        {
+                            <td>@p.ThetaSolid</td>
+                        }
+                    </tr>
+                    <tr>
+                        <th>θ газа</th>
+                        @foreach (var p in Model.Points)
+                        {
+                            <td>@p.ThetaGas</td>
+                        }
+                    </tr>
+                    <tr>
+                        <th>T материала, °C</th>
+                        @foreach (var p in Model.Points)
+                        {
+                            <td>@p.SolidTemp</td>
+                        }
+                    </tr>
+                    <tr>
+                        <th>T газа, °C</th>
+                        @foreach (var p in Model.Points)
+                        {
+                            <td>@p.GasTemp</td>
+                        }
+                    </tr>
+                    <tr>
+                        <th>ΔT = Tмат − Tгаз</th>
+                        @foreach (var p in Model.Points)
+                        {
+                            <td>@p.DeltaTemp</td>
+                        }
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const labels = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(
+                    Model.Points.Select(p => p.Height)));
+
+    const solid = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(
+                Model.Points.Select(p => p.SolidTemp)));
+
+    const gas = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(
+                Model.Points.Select(p => p.GasTemp)));
+
+    const delta = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(
+                Model.Points.Select(p => p.DeltaTemp)));
+
+    new Chart(tempChart, {
+        type: 'line',
+        data: {
+            labels,
+            datasets: [
+                { label: 'Материал', data: solid },
+                { label: 'Газ', data: gas }
+            ]
+        }
+    });
+
+        new Chart(deltaChart, {
+            type: 'line',
+            data: {
+                labels,
+                datasets: [
+                    { label: 'ΔT', data: delta }
+                ]
+            }
+        });
+    </script>
+}

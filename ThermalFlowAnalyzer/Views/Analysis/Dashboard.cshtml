@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ThermalFlowAnalyzer.Domain.AnalysisInput>
+
+<h3 class="mb-3">📂 Выполненные анализы</h3>
+
+<div class="card p-3">
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Высота слоя</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var a in Model)
+            {
+                <tr>
+                    <td>@a.ProjectTitle</td>
+                    <td>@a.LayerHeight</td>
+                    <td class="text-end">
+                        <a class="btn btn-outline-info btn-sm"
+                           href="/Analysis/Result/@a.Id">
+                            📊
+                        </a>
+
+                        <a class="btn btn-outline-warning btn-sm"
+                           href="/Analysis/Edit/@a.Id">
+                            ✏️
+                        </a>
+
+                        <a class="btn btn-outline-danger btn-sm"
+                           href="/Analysis/Delete/@a.Id">
+                            ❌
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

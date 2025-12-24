@@ -1,0 +1,44 @@
+﻿@model ThermalFlowAnalyzer.Domain.AnalysisInput
+
+<h3>✏️ Редактирование анализа</h3>
+
+<div class="card p-4">
+    <form method="post">
+        <input type="hidden" asp-for="Id" />
+
+        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+        <label>Название проекта</label>
+        <input asp-for="ProjectTitle" class="form-control" />
+
+        <label>Высота слоя</label>
+        <input asp-for="LayerHeight" step="0.5" class="form-control" />
+
+        <label>Диаметр колонны</label>
+        <input asp-for="ColumnDiameter" class="form-control" />
+
+        <label>T материала</label>
+        <input asp-for="SolidTempStart" class="form-control" />
+
+        <label>T газа</label>
+        <input asp-for="GasTempStart" class="form-control" />
+
+        <label>Скорость газа</label>
+        <input asp-for="GasSpeed" class="form-control" />
+
+        <label>αV</label>
+        <input asp-for="HeatTransferFactor" class="form-control" />
+
+        <label>Расход материала</label>
+        <input asp-for="SolidFlow" class="form-control" />
+
+        <label>Теплоемкость материала</label>
+        <input asp-for="SolidHeatCapacity" class="form-control" />
+
+        <label>Теплоемкость газа</label>
+        <input asp-for="GasHeatCapacity" class="form-control" />
+
+        <button class="btn btn-main mt-3">💾 Сохранить</button>
+        <a class="btn btn-secondary mt-3" href="/Analysis/Dashboard">Назад</a>
+    </form>
+</div>

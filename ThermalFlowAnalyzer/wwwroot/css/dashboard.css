@@ -1,0 +1,152 @@
+body {
+    font-family: "Segoe UI", sans-serif;
+}
+
+.card {
+    background-color: #1e1e1e;
+    border: 1px solid #2c2c2c;
+    border-radius: 12px;
+}
+
+.card-header {
+    background-color: #111;
+    font-weight: 600;
+}
+
+.table {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    border-collapse: collapse;
+}
+
+    .table th {
+        background-color: #111;
+        border: 1px solid #333;
+        text-align: center;
+    }
+
+    .table td {
+        border: 1px solid #333;
+        text-align: center;
+    }
+
+input, select {
+    background-color: #2a2a2a !important;
+    color: #fff !important;
+    border: 1px solid #444 !important;
+}
+
+label {
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+
+.btn-main {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    border: none;
+    color: white;
+}
+
+    .btn-main:hover {
+        opacity: 0.85;
+    }
+
+
+/* ===== ТЕКСТ И КОНТРАСТ ===== */
+
+body {
+    color: #e8e8e8;
+}
+
+/* Заголовки */
+h1, h2, h3, h4, h5 {
+    color: #ffffff;
+}
+
+/* Подписи полей */
+label {
+    color: #dcdcdc;
+}
+
+/* Таблицы */
+.table th,
+.table td {
+    color: #e8e8e8;
+}
+
+/* Вкладки */
+.nav-tabs .nav-link {
+    color: #9fb3c8;
+    background-color: transparent;
+    border: none;
+}
+
+    .nav-tabs .nav-link.active {
+        color: #ffffff;
+        background-color: #1e1e1e;
+        border-bottom: 2px solid #0dcaf0;
+    }
+
+/* Карточки */
+.card,
+.card-header {
+    color: #e8e8e8;
+}
+
+/* Placeholder в input */
+::placeholder {
+    color: #aaaaaa !important;
+}
+
+/* Ошибки валидации */
+.text-danger {
+    color: #ff6b6b !important;
+}
+/* ===== СВЕТЛАЯ ТАБЛИЦА (EXCEL-STYLE) ===== */
+
+.table-light {
+    background-color: #ffffff;
+    color: #000000;
+    border-collapse: collapse;
+}
+
+    .table-light th {
+        background-color: #f0f0f0;
+        color: #000000;
+        border: 1px solid #bfc5cc;
+        font-weight: 600;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .table-light td {
+        background-color: #ffffff;
+        color: #000000;
+        border: 1px solid #bfc5cc;
+        text-align: center;
+    }
+
+    .table-light tbody tr:nth-child(even) td {
+        background-color: #f9f9f9;
+    }
+
+/* ===== ТАБЛИЦА DASHBOARD (тёмная) ===== */
+.table:not(.table-light) td {
+    color: #000000;
+    background-color: #f8f9fa;
+}
+
+.table:not(.table-light) th {
+    color: #ffffff;
+}
+
+/* ===== ТАБЛИЦА РЕЗУЛЬТАТОВ (светлая, как Excel) ===== */
+.table-light th {
+    color: #000000 !important;
+    background-color: #f0f0f0;
+}
+
+.table-light td {
+    color: #000000 !important;
+    background-color: #ffffff;
+}
